@@ -37,7 +37,7 @@ input {
     font-family: Jura;
 }
 
-button {
+#main-button {
     border-radius: 36px;
     border: 1px solid #FFF;
     background: linear-gradient(90deg, #750000 0%, #DE0000 100%);
@@ -68,6 +68,7 @@ button {
 .checkbox-wrapper {
     display: flex;
     align-items: center;
+    background-color: none;
 }
 
 .checkbox {
@@ -81,6 +82,7 @@ button {
 .checkbox.checked {
     background: url('images/checkbox_checked.svg') no-repeat center center;
     background-size: contain;
+    
 }
 
 .remove-task {
@@ -88,6 +90,10 @@ button {
     border: none;
     cursor: pointer;
     padding: 0;
+}
+
+.remove-task button {
+    background: none;
 }
 
 .remove-icon {
