@@ -17,8 +17,7 @@ body {
     border: 1px solid #FFF;
     background: rgba(255, 255, 255, 0.10);
     backdrop-filter: blur(10px);
-    padding-left: 20px;
-    padding-top: 10px;
+    padding: 20px;
     margin-bottom: 50px;
 }
 
@@ -32,6 +31,10 @@ input {
     border: 1px solid #FFF;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
+    padding: 5px 10px;
+    width: 70%;
+    color: white;
+    font-family: Jura;
 }
 
 button {
@@ -41,14 +44,64 @@ button {
     backdrop-filter: blur(10px);
     color: white;
     padding: 5px 10px;
+    width: 20%;
+    cursor: pointer;
+}
+
+.todo-items {
+    padding: 0;
+    list-style: none;
+    margin-top: 20px;
+}
+
+.todo-items li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.todo-items li + li {
+    margin-top: 10px;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    background: url('images/checkbox.svg') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.checkbox.checked {
+    background: url('images/checkbox_checked.svg') no-repeat center center;
+    background-size: contain;
+}
+
+.remove-task {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.remove-icon {
+    width: 18.339px;
+    height: 18.516px;
+    background: url('images/remove.svg') no-repeat center center;
+    background-size: contain;
 }
 
 footer {
     border-top: 1px solid #fff;
     background: #070707;
-    width: 110%;
+    width: 100%;
     display: flex;
-    height: 100%;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -66,7 +119,7 @@ footer {
     text-align: center;
     font-style: normal;
     font-size: 16px;
-    justify-content: baseline;
-    align-items: baseline;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
 }
-
