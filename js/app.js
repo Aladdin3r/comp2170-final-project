@@ -1,44 +1,77 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector('.todo-form');
-    const input = document.querySelector('input[name="name"]');
-    const todoList = document.querySelector('.todo-items');
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.querySelector(".todo-form");
+  const input = document.querySelector('input[name="name"]');
+  const todoList = document.querySelector(".todo-items");
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const taskText = input.value.trim();
-        if (taskText !== "") {
-            addTask(taskText);
-            input.value = "";
-        }
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const taskText = input.value.trim();
+    if (taskText) {
+      addTask(taskText);
+      input.value = "";
+    }
+  });
+
+  function addTask(taskText) {
+    const li = document.createElement("li");
+
+    const checkboxWrapper = document.createElement("div");
+    checkboxWrapper.classList.add("checkbox-wrapper");
+
+    const checkbox = document.createElement("div");
+    checkbox.classList.add("checkbox");
+    checkbox.addEventListener("click", function () {
+      checkbox.classList.toggle("checked");
+      task.classList.toggle("crossed-out");
     });
 
-    function addTask(taskText) {
-        const li = document.createElement('li');
+    const task = document.createElement("span");
+    task.textContent = taskText;
 
-        const checkboxWrapper = document.createElement('div');
-        checkboxWrapper.classList.add('checkbox-wrapper');
+    // remove btn
+    const removeButton = document.createElement("button");
+    removeButton.classList.add("remove-task");
+    removeButton.innerHTML = '<img src="images/remove.svg"/>';
+    removeButton.addEventListener("click", function () {
+      li.remove();
+    });
 
-        const checkbox = document.createElement('div');
-        checkbox.classList.add('checkbox');
-        checkbox.addEventListener('click', function() {
-            checkbox.classList.toggle('checked');
-        });
+    // edit btn
+    const editButton = document.createElement("button");
+    editButton.classList.add("edit-task");
+    editButton.textContent = "Edit";
 
-        const task = document.createElement('span');
-        task.textContent = taskText;
+    editButton.addEventListener("click", function () {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.value = task.textContent;
 
-        const removeButton = document.createElement('button');
-        removeButton.classList.add('remove-task');
-        removeButton.innerHTML = '<img src="images/remove.svg"/>';
-        removeButton.addEventListener('click', function() {
-            li.remove();
-        });
+      task.replaceWith(input);
+      input.focus();
 
-        checkboxWrapper.appendChild(checkbox);
-        li.appendChild(checkboxWrapper);
-        li.appendChild(task);
-        li.appendChild(removeButton);
+      input.addEventListener("blur", function () {
+        task.textContent = input.value;
+        input.replaceWith(task);
+      });
 
-        todoList.appendChild(li);
-    }
+      input.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          task.textContent = input.value;
+          input.replaceWith(task);
+        }
+      });
+    });
+
+    checkboxWrapper.appendChild(checkbox);
+    li.appendChild(checkboxWrapper);
+    li.appendChild(task);
+
+    const buttonsDiv = document.createElement("div");
+    buttonsDiv.classList.add("buttons");
+    buttonsDiv.appendChild(editButton);
+    buttonsDiv.appendChild(removeButton);
+
+    li.appendChild(buttonsDiv);
+    todoList.appendChild(li);
+  }
 });
