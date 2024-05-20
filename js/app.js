@@ -62,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
+    // list appending
     checkboxWrapper.appendChild(checkbox);
     li.appendChild(checkboxWrapper);
     li.appendChild(task);
