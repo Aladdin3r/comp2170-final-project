@@ -8,11 +8,9 @@ body {
   font-family: Jura;
   color: white;
   display: flex;
-  padding-top: 10px;
   flex-direction: column;
-  justify-content: flex-end;
   align-items: center;
-  gap: 10px;
+  margin: 0;
 }
 
 .todo {
@@ -23,7 +21,7 @@ body {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   padding: 24px 32px;
-  margin-bottom: 50px;
+  margin: 48px 0;
 }
 
 .todo::-webkit-scrollbar {
@@ -46,7 +44,7 @@ input {
   border: 1px solid #fff;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
-  padding: 5px 10px;
+  padding: 6px 12px;
   width: 70%;
   color: white;
   font-family: Jura;
