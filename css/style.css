@@ -101,7 +101,9 @@ input {
 .todo-items li {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  align-items: center;
+  height: 24px;
+  padding: 12px;
 }
 
 .buttons {
@@ -110,10 +112,6 @@ input {
   gap: 32px;
   align-items: center;
   justify-content: center;
-}
-
-.todo-items li + li {
-  margin-top: 5px;
 }
 
 .checkbox-wrapper {
@@ -141,6 +139,7 @@ input {
 
 .crossed-out {
   text-decoration: line-through;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .edit-task {
@@ -151,6 +150,16 @@ input {
   font-family: Jura;
   font-size: 16px;
   color: white;
+}
+
+.edit-input {
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.edit-input:focus {
+  outline: none;
 }
 
 .remove-task {

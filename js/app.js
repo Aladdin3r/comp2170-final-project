@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const input = document.createElement("input");
       input.type = "text";
       input.value = task.textContent;
+      input.classList.add("edit-input");
 
       task.replaceWith(input);
       input.focus();
