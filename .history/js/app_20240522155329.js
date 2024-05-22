@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector(".todo-form");
   const input = document.querySelector('input[name="name"]');
   const todoList = document.querySelector(".todo-items");
-  const errorMessage = document.querySelector(".error-message");
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -10,10 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (taskText) {
       addTask(taskText);
       input.value = "";
-      errorMessage.style.display = "none"; // Hide error message
-    } else {
-      errorMessage.textContent = "Task cannot be empty!";
-      errorMessage.style.display = "block"; // Show error message
     }
   });
 
@@ -33,15 +28,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const task = document.createElement("span");
     task.textContent = taskText;
 
-    // remove button
-    const removeButton = document.createElement("button");
-    removeButton.classList.add("remove-task");
-    removeButton.innerHTML = '<img src="images/remove.svg"/>';
-    removeButton.addEventListener("click", function () {
-      li.remove();
-    });
+    // remove btn
+   
 
-    // edit button
+    // edit btn
     const editButton = document.createElement("button");
     editButton.classList.add("edit-task");
     editButton.textContent = "Edit";

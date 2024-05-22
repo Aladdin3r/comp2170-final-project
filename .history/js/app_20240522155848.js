@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector(".todo-form");
   const input = document.querySelector('input[name="name"]');
   const todoList = document.querySelector(".todo-items");
-  const errorMessage = document.querySelector(".error-message");
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -10,10 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (taskText) {
       addTask(taskText);
       input.value = "";
-      errorMessage.style.display = "none"; // Hide error message
-    } else {
-      errorMessage.textContent = "Task cannot be empty!";
-      errorMessage.style.display = "block"; // Show error message
     }
   });
 

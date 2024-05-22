@@ -190,8 +190,8 @@ input {
 }
 
 .edit-task:active {
-  color: #4caf50; 
-  transform: scale(0.95); 
+  color: #4caf50; /* Example: Change text color on click */
+  transform: scale(0.95); /* Example: Scale down the button briefly on click */
   transition: color 0.1s ease, transform 0.1s ease;
 }
 

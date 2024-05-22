@@ -172,7 +172,7 @@ input {
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* edit button animations */
+/* Edit button animations */
 .edit-task {
   background: none;
   border: none;
@@ -185,13 +185,13 @@ input {
 }
 
 .edit-task:hover {
-  color: #a5d6a7; 
-  transform: scale(1.1);
+  color: #a5d6a7; /* Example: Change text color on hover */
+  transform: scale(1.1);  /* Example: Scale up the button on hover */
 }
 
 .edit-task:active {
-  color: #4caf50; 
-  transform: scale(0.95); 
+  color: #4caf50; /* Example: Change text color on click */
+  transform: scale(0.95); /* Example: Scale down the button briefly on click */
   transition: color 0.1s ease, transform 0.1s ease;
 }
 

@@ -50,7 +50,6 @@ input {
   font-family: Jura;
 }
 
-/* add button animations */
 #main-button {
   border-radius: 36px;
   border: 1px solid #fff;
@@ -61,20 +60,7 @@ input {
   width: 20%;
   cursor: pointer;
   font-family: Jura;
-  transition: background-color 0.3s ease, transform 0.3s ease;
 }
-
-#main-button:hover {
-  background-color: #a50000; /* Example: Change background color on hover */
-  transform: scale(1.1);  /* Example: Scale up the button on hover */
-}
-
-#main-button:active {
-  background-color: #530000; /* Example: Change background color on click */
-  transform: scale(0.95); /* Example: Scale down the button briefly on click */
-  transition: background-color 0.1s ease, transform 0.1s ease;
-}
-
 
 .todos {
   margin-top: 24px;
@@ -172,7 +158,6 @@ input {
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* edit button animations */
 .edit-task {
   background: none;
   border: none;
@@ -181,18 +166,6 @@ input {
   font-family: Jura;
   font-size: 16px;
   color: white;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.edit-task:hover {
-  color: #a5d6a7; 
-  transform: scale(1.1);
-}
-
-.edit-task:active {
-  color: #4caf50; 
-  transform: scale(0.95); 
-  transition: color 0.1s ease, transform 0.1s ease;
 }
 
 .edit-input {
