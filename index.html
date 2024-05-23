@@ -27,6 +27,22 @@
   <body>
     <main>
 
+      <div id="delete-confirmation-popup" class="popup">
+        <div class="popup-content">
+          <span class="close-button">&times;</span>
+          <h2>Confirm Delete</h2>
+          <p>Are you sure you want to delete this task?</p>
+          <label>
+            <input type="checkbox" id="dont-ask-again" />
+            Don't ask me again
+          </label>
+          <div>
+            <button id="confirm-delete">Yes</button>
+            <button id="cancel-delete">No</button>
+          </div>
+        </div>
+      </div>
+
       <button id="tutorial-button" class="question-button">?</button>
       <div id="tutorial-popup" class="popup">
         <div class="popup-content">
