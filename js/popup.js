@@ -1,4 +1,3 @@
-// Popup JavaScript
 document.addEventListener("DOMContentLoaded", function () {
     const popup = document.getElementById("tutorial-popup");
     const closeButton = document.querySelector(".close-button");
