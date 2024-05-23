@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
       saveData();
       errorMessage.style.display = "none";
     } else {
-      errorMessage.textContent = "Task cannot be empty!";
-      errorMessage.style.display = "block";
+      errorMessage.textContent = "Task cannot be empty, try again.";
+      errorMessage.style.display = "block"; 
     }
   });
 
