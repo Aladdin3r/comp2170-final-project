@@ -20,9 +20,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  function addTask(taskText, priority) {
+  function addTask(taskText) {
     const li = document.createElement("li");
-    li.classList.add("task-item", `priority-${priority}`);
+    li.classList.add("task-item");
 
     const checkboxWrapper = document.createElement("div");
     checkboxWrapper.classList.add("checkbox-wrapper");
@@ -95,7 +95,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".task-item").forEach(function (task) {
       tasks.push({
         text: task.querySelector("span").textContent,
-        priority: task.classList[1].split('-')[1],
         completed: task.querySelector(".checkbox").classList.contains("checked")
       });
     });
@@ -105,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function showTask() {
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     tasks.forEach(function (task) {
-      addTask(task.text, task.priority);
+      addTask(task.text);
       if (task.completed) {
         const lastAddedTask = todoList.lastChild;
         lastAddedTask.querySelector(".checkbox").classList.add("checked");
