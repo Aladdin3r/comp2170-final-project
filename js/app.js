@@ -4,31 +4,39 @@ document.addEventListener("DOMContentLoaded", function () {
   const todoList = document.querySelector(".todo-items");
   const errorMessage = document.querySelector(".error-message");
   const charCount = document.querySelector("#char-count");
+  const submitButton = document.querySelector("#main-button");
   const MAX_CHARS = 50;
 
-
   input.addEventListener("input", function () {
-    charCount.textContent = `${input.value.length}/${MAX_CHARS}`;
-    if (input.value.length > MAX_CHARS) {
+    const inputLength = input.value.length;
+    charCount.textContent = `${inputLength}/${MAX_CHARS}`;
+    if (inputLength > MAX_CHARS) {
       charCount.style.color = "red";
+      errorMessage.textContent = "Woah there speedracer, cut it down a little bit ;)";
+      errorMessage.style.display = "block";
+      submitButton.disabled = true;
     } else {
       charCount.style.color = "white";
+      errorMessage.style.display = "none";
+      submitButton.disabled = false;
     }
   });
-
-  let taskToRemove;
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     const taskText = input.value.trim();
-    if (taskText) {
+    if (taskText.length > MAX_CHARS) {
+      errorMessage.textContent = "Character limit exceeded. Please shorten your task.";
+      errorMessage.style.display = "block";
+    } else if (taskText) {
       addTask(taskText);
       input.value = "";
+      charCount.textContent = `0/${MAX_CHARS}`; 
       saveData();
       errorMessage.style.display = "none";
     } else {
       errorMessage.textContent = "Task cannot be empty, try again.";
-      errorMessage.style.display = "block"; 
+      errorMessage.style.display = "block";
     }
   });
 
@@ -50,7 +58,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const task = document.createElement("span");
     task.textContent = taskText;
 
-    // remove button
     const removeButton = document.createElement("button");
     removeButton.classList.add("remove-task");
     removeButton.innerHTML = '<img src="images/remove.svg"/>';
@@ -59,11 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
       handleRemoveTask();
     });
 
-    // edit button
     const editButton = document.createElement("button");
     editButton.classList.add("edit-task");
     editButton.textContent = "Edit";
-
     editButton.addEventListener("click", function () {
       const input = document.createElement("input");
       input.type = "text";
@@ -88,7 +93,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    // list appending
     checkboxWrapper.appendChild(checkbox);
     li.appendChild(checkboxWrapper);
     li.appendChild(task);
@@ -107,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".task-item").forEach(function (task) {
       tasks.push({
         text: task.querySelector("span").textContent,
-        completed: task.querySelector(".checkbox").classList.contains("checked")
+        completed: task.querySelector(".checkbox").classList.contains("checked"),
       });
     });
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -155,10 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".close-button").addEventListener("click", function () {
       popup.style.display = "none";
     });
-
   }
 
   showTask();
-
 });
-
