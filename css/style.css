@@ -320,5 +320,6 @@ footer {
 }
 
 .question-button:hover {
-  background-color: #0056b3;
+  background-color: rgb(45, 45, 45);
+  color: #cfcfcf;
 }
