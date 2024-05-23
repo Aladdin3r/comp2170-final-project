@@ -187,9 +187,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // card buttons
   const prevButton = document.getElementById("prev-button");
   const nextButton = document.getElementById("next-button");
+  const cards = document.querySelectorAll(".todo");
 
   let currentIndex = 0;
-  const cards = document.querySelectorAll(".todo");
 
   prevButton.addEventListener("click", function () {
     cards[currentIndex].classList.remove("front");
