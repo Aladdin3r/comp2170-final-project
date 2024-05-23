@@ -8,7 +8,7 @@ body {
   font-family: Jura;
   color: white;
   margin: 0;
-  height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
