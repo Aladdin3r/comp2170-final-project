@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const todoList = document.querySelector(".todo-items");
   const errorMessage = document.querySelector(".error-message");
   const charCount = document.querySelector("#char-count");
-  const MAX_CHARS = 50;
+    const MAX_CHARS = 50;
 
 
   input.addEventListener("input", function () {

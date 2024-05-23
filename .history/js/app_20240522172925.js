@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
       input.value = "";
       saveData();
       errorMessage.style.display = "none";
-    } else {
+    } else if{
       errorMessage.textContent = "Task cannot be empty, try again.";
       errorMessage.style.display = "block"; 
     }

@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function addTask(taskText, priority) {
     const li = document.createElement("li");
-    li.classList.add("task-item", `priority-${priority}`);
+    li.classList.add("task-item", );
 
     const checkboxWrapper = document.createElement("div");
     checkboxWrapper.classList.add("checkbox-wrapper");

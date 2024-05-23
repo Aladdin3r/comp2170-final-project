@@ -19,14 +19,19 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     const taskText = input.value.trim();
-    if (taskText) {
-      addTask(taskText);
-      input.value = "";
-      saveData();
-      errorMessage.style.display = "none";
+    const priority = prioritySelect.value;
+    if (taskText.length === 0) {
+      errorMessage.textContent = "Task cannot be empty!";
+      errorMessage.style.display = "block";
+    } else if (taskText.length > MAX_CHARS) {
+      errorMessage.textContent = `Task cannot exceed ${MAX_CHARS} characters!`;
+      errorMessage.style.display = "block";
     } else {
-      errorMessage.textContent = "Task cannot be empty, try again.";
-      errorMessage.style.display = "block"; 
+      addTask(taskText, priority);
+      saveData();
+      input.value = "";
+      charCount.textContent = `0/${MAX_CHARS}`;
+      errorMessage.style.display = "none"; 
     }
   });
 

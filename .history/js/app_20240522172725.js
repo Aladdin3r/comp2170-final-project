@@ -3,18 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const input = document.querySelector('input[name="name"]');
   const todoList = document.querySelector(".todo-items");
   const errorMessage = document.querySelector(".error-message");
-  const charCount = document.querySelector("#char-count");
-  const MAX_CHARS = 50;
-
-
-  input.addEventListener("input", function () {
-    charCount.textContent = `${input.value.length}/${MAX_CHARS}`;
-    if (input.value.length > MAX_CHARS) {
-      charCount.style.color = "red";
-    } else {
-      charCount.style.color = "white";
-    }
-  });
+  
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();

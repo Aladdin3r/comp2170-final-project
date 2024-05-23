@@ -19,15 +19,23 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     const taskText = input.value.trim();
+    const priotity = p
     if (taskText) {
       addTask(taskText);
       input.value = "";
       saveData();
       errorMessage.style.display = "none";
-    } else {
+    } else if(){
       errorMessage.textContent = "Task cannot be empty, try again.";
       errorMessage.style.display = "block"; 
+    } else {
+      addTask(taskText, priority);
+      saveData();
+      input.value = "";
+      charCount.textContent = `0/${MAX_CHARS}`;
+      errorMessage.style.display = "none"; 
     }
+
   });
 
   function addTask(taskText, priority) {
