@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
       input.value = "";
       errorMessage.style.display = "none"; // Hide error message
     } else {
-      errorMessage.textContent = "Task cannot be empty!";
+      errorMessage.textContent = "Task cannot be empty, try again.";
       errorMessage.style.display = "block"; // Show error message
     }
   });
