@@ -12,12 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   
     closeButton.addEventListener("click", closePopup);
-  
-    window.addEventListener("click", function (event) {
-      if (event.target === popup) {
-        closePopup();
-      }
-    });
+
   
     tutorialButton.addEventListener("click", openPopup);
   });
