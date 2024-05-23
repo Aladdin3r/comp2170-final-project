@@ -293,7 +293,7 @@ footer {
   padding: 20px;
   border: 1px solid #888;
   width: 500px; 
-  border-radius: 10px;
+  border-radius: 36px;
 }
 
 .close-button {
@@ -362,6 +362,11 @@ footer {
   border: 1px solid #888;
   width: 500px; 
   border-radius: 10px;
+  gap: 10px;
+}
+
+.popup-content input {
+  width: 30px;
 }
 
 .popup-content p {
@@ -374,7 +379,10 @@ footer {
 .checkbox-label {
   display: flex;
   align-items: center;
-  gap: 10px;
+}
+
+.confirmButtons {
+  padding-top: 15px;
 }
 
 .checkbox-label input{
@@ -401,3 +409,22 @@ footer {
   cursor: pointer;
 }
 
+#confirm-delete {
+  width: 100px;
+  height: 30px;
+  border-radius: 30px;
+  background-color: #7c0505;
+  border: 1px solid #fff;
+  color: white;
+  font-family: Jura;
+}
+
+#cancel-delete {
+  width: 100px;
+  height: 30px;
+  border-radius: 30px;
+  background-color: #7c0505;
+  border: 1px solid #fff;
+  color: white;
+  font-family: Jura;
+}
