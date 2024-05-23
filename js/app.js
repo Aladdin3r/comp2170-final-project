@@ -10,15 +10,17 @@ document.addEventListener("DOMContentLoaded", function () {
     if (taskText) {
       addTask(taskText);
       input.value = "";
-      errorMessage.style.display = "none"; // Hide error message
+      saveData();
+      errorMessage.style.display = "none";
     } else {
       errorMessage.textContent = "Task cannot be empty, try again.";
-      errorMessage.style.display = "block"; // Show error message
+      errorMessage.style.display = "block"; 
     }
   });
 
-  function addTask(taskText) {
+  function addTask(taskText, priority) {
     const li = document.createElement("li");
+    li.classList.add("task-item", `priority-${priority}`);
 
     const checkboxWrapper = document.createElement("div");
     checkboxWrapper.classList.add("checkbox-wrapper");
@@ -28,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     checkbox.addEventListener("click", function () {
       checkbox.classList.toggle("checked");
       task.classList.toggle("crossed-out");
+      saveData();
     });
 
     const task = document.createElement("span");
@@ -39,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     removeButton.innerHTML = '<img src="images/remove.svg"/>';
     removeButton.addEventListener("click", function () {
       li.remove();
+      saveData();
     });
 
     // edit button
@@ -58,12 +62,14 @@ document.addEventListener("DOMContentLoaded", function () {
       input.addEventListener("blur", function () {
         task.textContent = input.value;
         input.replaceWith(task);
+        saveData();
       });
 
       input.addEventListener("keypress", function (e) {
         if (e.key === "Enter") {
           task.textContent = input.value;
           input.replaceWith(task);
+          saveData();
         }
       });
     });
@@ -81,4 +87,32 @@ document.addEventListener("DOMContentLoaded", function () {
     li.appendChild(buttonsDiv);
     todoList.appendChild(li);
   }
+
+  function saveData() {
+    const tasks = [];
+    document.querySelectorAll(".task-item").forEach(function (task) {
+      tasks.push({
+        text: task.querySelector("span").textContent,
+        priority: task.classList[1].split('-')[1],
+        completed: task.querySelector(".checkbox").classList.contains("checked")
+      });
+    });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+
+  function showTask() {
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.forEach(function (task) {
+      addTask(task.text, task.priority);
+      if (task.completed) {
+        const lastAddedTask = todoList.lastChild;
+        lastAddedTask.querySelector(".checkbox").classList.add("checked");
+        lastAddedTask.querySelector("span").classList.add("crossed-out");
+      }
+    });
+  }
+
+  showTask();
+
 });
+
