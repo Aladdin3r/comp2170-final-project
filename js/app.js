@@ -1,46 +1,50 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const form = document.querySelector(".todo-form");
-  const input = document.querySelector('input[name="name"]');
-  const todoList = document.querySelector(".todo-items");
-  const errorMessage = document.querySelector(".error-message");
-  const charCount = document.querySelector("#char-count");
-  const submitButton = document.querySelector("#main-button");
+  const forms = document.querySelectorAll(".todo-form");
+  const inputs = document.querySelectorAll('input[name="name"]');
+  const todoLists = document.querySelectorAll(".todo-items");
+  const errorMessages = document.querySelectorAll(".error-message");
+  const charCounts = document.querySelectorAll("#char-count");
+  const submitButtons = document.querySelectorAll("#main-button");
   const MAX_CHARS = 50;
 
-  input.addEventListener("input", function () {
-    const inputLength = input.value.length;
-    charCount.textContent = `${inputLength}/${MAX_CHARS}`;
-    if (inputLength > MAX_CHARS) {
-      charCount.style.color = "red";
-      errorMessage.textContent = "Woah there speedracer, cut it down a little bit ;)";
-      errorMessage.style.display = "block";
-      submitButton.disabled = true;
-    } else {
-      charCount.style.color = "white";
-      errorMessage.style.display = "none";
-      submitButton.disabled = false;
-    }
+  inputs.forEach((input, index) => {
+    input.addEventListener("input", function () {
+      const inputLength = input.value.length;
+      charCounts[index].textContent = `${inputLength}/${MAX_CHARS}`;
+      if (inputLength > MAX_CHARS) {
+        charCounts[index].style.color = "red";
+        errorMessages[index].textContent = "Woah there speedracer, cut it down a little bit ;)";
+        errorMessages[index].style.display = "block";
+        submitButtons[index].disabled = true;
+      } else {
+        charCounts[index].style.color = "white";
+        errorMessages[index].style.display = "none";
+        submitButtons[index].disabled = false;
+      }
+    });
   });
 
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    const taskText = input.value.trim();
-    if (taskText.length > MAX_CHARS) {
-      errorMessage.textContent = "Character limit exceeded. Please shorten your task.";
-      errorMessage.style.display = "block";
-    } else if (taskText) {
-      addTask(taskText);
-      input.value = "";
-      charCount.textContent = `0/${MAX_CHARS}`; 
-      saveData();
-      errorMessage.style.display = "none";
-    } else {
-      errorMessage.textContent = "Task cannot be empty, try again.";
-      errorMessage.style.display = "block";
-    }
+  forms.forEach((form, index) => {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const taskText = inputs[index].value.trim();
+      if (taskText.length > MAX_CHARS) {
+        errorMessages[index].textContent = "Character limit exceeded. Please shorten your task.";
+        errorMessages[index].style.display = "block";
+      } else if (taskText) {
+        addTask(taskText, todoLists[index]);
+        inputs[index].value = "";
+        charCounts[index].textContent = `0/${MAX_CHARS}`;
+        saveData();
+        errorMessages[index].style.display = "none";
+      } else {
+        errorMessages[index].textContent = "Task cannot be empty, try again.";
+        errorMessages[index].style.display = "block";
+      }
+    });
   });
 
-  function addTask(taskText) {
+  function addTask(taskText, targetList) {
     const li = document.createElement("li");
     li.classList.add("task-item");
 
@@ -103,29 +107,46 @@ document.addEventListener("DOMContentLoaded", function () {
     buttonsDiv.appendChild(removeButton);
 
     li.appendChild(buttonsDiv);
-    todoList.appendChild(li);
+    targetList.appendChild(li);
   }
 
   function saveData() {
-    const tasks = [];
-    document.querySelectorAll(".task-item").forEach(function (task) {
-      tasks.push({
-        text: task.querySelector("span").textContent,
-        completed: task.querySelector(".checkbox").classList.contains("checked"),
+    const data = {
+      daily: [],
+      weekly: [],
+      monthly: []
+    };
+
+    todoLists.forEach((list, index) => {
+      const listId = list.closest(".todo").id;
+      document.querySelectorAll(`#${listId} .task-item`).forEach(function (task) {
+        data[listId].push({
+          text: task.querySelector("span").textContent,
+          completed: task.querySelector(".checkbox").classList.contains("checked"),
+        });
       });
     });
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    localStorage.setItem("tasks", JSON.stringify(data));
   }
 
   function showTask() {
-    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    tasks.forEach(function (task) {
-      addTask(task.text);
-      if (task.completed) {
-        const lastAddedTask = todoList.lastChild;
-        lastAddedTask.querySelector(".checkbox").classList.add("checked");
-        lastAddedTask.querySelector("span").classList.add("crossed-out");
-      }
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || {
+      daily: [],
+      weekly: [],
+      monthly: []
+    };
+
+    Object.keys(tasks).forEach(listId => {
+      tasks[listId].forEach(function (task) {
+        const list = document.querySelector(`#${listId} .todo-items`);
+        addTask(task.text, list);
+        if (task.completed) {
+          const lastAddedTask = list.lastChild;
+          lastAddedTask.querySelector(".checkbox").classList.add("checked");
+          lastAddedTask.querySelector("span").classList.add("crossed-out");
+        }
+      });
     });
   }
 
@@ -162,4 +183,23 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   showTask();
+
+  // card buttons
+  const prevButton = document.getElementById("prev-button");
+  const nextButton = document.getElementById("next-button");
+
+  let currentIndex = 0;
+  const cards = document.querySelectorAll(".todo");
+
+  prevButton.addEventListener("click", function () {
+    cards[currentIndex].classList.remove("front");
+    currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+    cards[currentIndex].classList.add("front");
+  });
+
+  nextButton.addEventListener("click", function () {
+    cards[currentIndex].classList.remove("front");
+    currentIndex = (currentIndex + 1) % cards.length;
+    cards[currentIndex].classList.add("front");
+  });
 });
