@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  let taskToRemove;
+
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     const taskText = input.value.trim();
@@ -53,8 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
     removeButton.classList.add("remove-task");
     removeButton.innerHTML = '<img src="images/remove.svg"/>';
     removeButton.addEventListener("click", function () {
-      li.remove();
-      saveData();
+      taskToRemove = li;
+      handleRemoveTask();
     });
 
     // edit button
@@ -120,6 +122,44 @@ document.addEventListener("DOMContentLoaded", function () {
         const lastAddedTask = todoList.lastChild;
         lastAddedTask.querySelector(".checkbox").classList.add("checked");
         lastAddedTask.querySelector("span").classList.add("crossed-out");
+      }
+    });
+  }
+
+  function handleRemoveTask() {
+    const dontAskAgain = localStorage.getItem("dontAskAgain");
+    if (dontAskAgain === "true") {
+      taskToRemove.remove();
+      saveData();
+    } else {
+      showDeleteConfirmationPopup();
+    }
+  }
+
+  function showDeleteConfirmationPopup() {
+    const popup = document.getElementById("delete-confirmation-popup");
+    popup.style.display = "block";
+
+    document.getElementById("confirm-delete").addEventListener("click", function () {
+      if (document.getElementById("dont-ask-again").checked) {
+        localStorage.setItem("dontAskAgain", "true");
+      }
+      taskToRemove.remove();
+      saveData();
+      popup.style.display = "none";
+    });
+
+    document.getElementById("cancel-delete").addEventListener("click", function () {
+      popup.style.display = "none";
+    });
+
+    document.querySelector(".close-button").addEventListener("click", function () {
+      popup.style.display = "none";
+    });
+
+    window.addEventListener("click", function (event) {
+      if (event.target === popup) {
+        popup.style.display = "none";
       }
     });
   }

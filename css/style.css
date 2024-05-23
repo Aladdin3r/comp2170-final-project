@@ -306,3 +306,66 @@ footer {
   text-decoration: none;
   cursor: pointer;
 }
+
+/* TUTORIAL BUTTON */
+.question-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #cfcfcf;
+  color: rgb(45, 45, 45);
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 20px; 
+  right: 20px; 
+  z-index: 1000;
+}
+
+.question-button:hover {
+  background-color: rgb(45, 45, 45);
+  color: #cfcfcf;
+}
+
+/* DELETE CONFIRMATION */
+.popup {
+  display: none; 
+  position: fixed; 
+  z-index: 1000; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  overflow: auto; 
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4); 
+}
+
+.popup-content {
+  background-color: #242424;
+  margin: 15% auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 500px; 
+  border-radius: 10px;
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
